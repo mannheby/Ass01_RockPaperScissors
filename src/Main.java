@@ -16,6 +16,7 @@ public class Main
         final String aWins = " Player A wins!";
         final String bWins = " Player B wins!";
         boolean done = false; // will loop until done equals true
+        boolean done2 = false; // to make sure ending is a valid input
         do { // do while loop runs app until user is done
             do { //do while loop runs until user has input a correct value
                 System.out.println(rpsMenuA);
@@ -98,23 +99,25 @@ public class Main
 
             done = false;
             System.out.print("Are you done playing? Y/N:"); // asks if the user is done playing
-            if (in.hasNextLine()) {
-                donePlaying = in.nextLine();
-                if (donePlaying.equalsIgnoreCase("Y"))
+            do
+            {
+                if (in.hasNextLine())
                 {
-                    done = true; //if they are the program ends
+                    donePlaying = in.nextLine();
+                    if (donePlaying.equalsIgnoreCase("Y"))
+                    {
+                        done = true; //if they are the program ends
+                        done2 = true; //valid input
+                    } else if (donePlaying.equalsIgnoreCase("N"))
+                    {
+                        System.out.println("Lets continue."); // if not it continues
+                        done2 = true;
+                    } else
+                    {
+                        System.out.println(donePlaying + " is not a valid choice.\nPlease enter a valid choice."); //if invalid response, it asks again
+                    }
                 }
-                else if (donePlaying.equalsIgnoreCase("N"))
-                {
-                    System.out.println("Lets continue."); // if not it continues
-                }
-                else {
-
-                    System.out.println(donePlaying + " is not a valid choice.\nPlease enter a valid choice."); //if invalid response, it asks again
-                }
-            }
-
-
+            }while(!done2);
         }while(!done);
 
     }
